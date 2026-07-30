@@ -1,0 +1,30 @@
+# Keeps the template (and products cut from it) from aging between adoptions:
+# the full CI gate on every PR is what makes automated bumps safe to merge.
+# Updates arrive as one grouped PR per ecosystem per week — review noise stays
+# proportional to the human attention available, and a failing gate on a group
+# names exactly which ecosystem's bump needs a human.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /frontend
+    schedule:
+      interval: weekly
+    groups:
+      frontend:
+        patterns: ["*"]
+
+  - package-ecosystem: uv
+    directory: /backend
+    schedule:
+      interval: weekly
+    groups:
+      backend:
+        patterns: ["*"]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      actions:
+        patterns: ["*"]

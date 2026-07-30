@@ -1,0 +1,56 @@
+{
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "files": {
+    "includes": [
+      "**",
+      "!src/routeTree.gen.ts",
+      // Tailwind v4 at-rules (@theme inline) aren't valid vanilla CSS to
+      // Biome's parser — the one stylesheet stays hand-formatted.
+      "!src/styles/index.css",
+      "!dist",
+      "!storybook-static",
+      "!test-results",
+      "!playwright-report"
+    ]
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space"
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "preset": "recommended"
+    },
+    "domains": {
+      "react": "recommended",
+      "test": "recommended"
+    }
+  },
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": "on"
+      }
+    }
+  },
+  "overrides": [
+    {
+      "includes": ["src/components/**", "!**/*.stories.tsx", "!**/*.test.tsx"],
+      "linter": {
+        "rules": {
+          "style": {
+            "noRestrictedGlobals": {
+              "level": "error",
+              "options": {
+                "deniedGlobals": {
+                  "fetch": "Components never fetch (docs/components.md): server state flows route → hook (src/hooks/) → props, and fetch() is called only in src/lib/api-client.ts."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

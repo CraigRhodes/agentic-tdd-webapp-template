@@ -1,0 +1,7 @@
+# Not a monorepo — since pnpm 10 this file doubles as the project config
+# file, and build permissions live here. `allowBuilds` is the pnpm 11 name
+# (pnpm 10 called it `onlyBuiltDependencies`). esbuild (via vite) needs its
+# postinstall script to fetch the platform binary; everything else stays
+# blocked by default.
+allowBuilds:
+  esbuild: true

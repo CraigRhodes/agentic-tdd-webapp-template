@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+/* Placeholder design tokens — replace the values with your product's palette
+   (and record it in docs/design.md). Raw values live on :root so an
+   alternate theme ships as a selector swapping the variables (e.g.
+   [data-theme="light"]); @theme inline maps them into Tailwind utilities
+   (bg-app-bg, text-app-ink, …). Components consume the utilities only —
+   never raw hex, never palette props. */
+:root {
+  --app-bg: #111315;
+  --app-surface: #1a1d20;
+  --app-ink: #ececec;
+  --app-accent: #7c86ff;
+  --app-ok: #3fb27f;
+  --app-danger: #e5534b;
+}
+
+@theme inline {
+  --color-app-bg: var(--app-bg);
+  --color-app-surface: var(--app-surface);
+  --color-app-ink: var(--app-ink);
+  --color-app-accent: var(--app-accent);
+  --color-app-ok: var(--app-ok);
+  --color-app-danger: var(--app-danger);
+}
