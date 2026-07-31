@@ -19,7 +19,7 @@ docs/                   workflow · prd · design · architecture · components 
                         and the approved task list (created on first use)
 frontend/               Vite + React 19 + TS strict (pnpm)
 backend/                FastAPI + Pydantic v2 (uv)
-.github/                workflows/: CI, the identical full gate on every PR ·
+.github/                workflows/: backend + frontend + e2e, the identical full gate on every PR ·
                         dependabot.yml: weekly grouped dependency bumps (the
                         gate is what makes merging them safe)
 ```

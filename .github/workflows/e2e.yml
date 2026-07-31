@@ -1,4 +1,4 @@
-name: CI
+name: E2E
 
 on:
   push:
@@ -12,47 +12,6 @@ concurrency:
   cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 jobs:
-  backend:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: backend
-    steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v5
-        with:
-          version: "0.11.28" # pinned like pnpm (packageManager) — a uv release can't change CI under a PR
-          python-version: "3.13"
-          enable-cache: true
-          cache-dependency-glob: backend/uv.lock
-      - run: uv sync --locked # like pnpm's --frozen-lockfile — a stale uv.lock fails instead of silently re-locking
-      - run: uv run ruff check .
-      - run: uv run ruff format --check .
-      - run: uv run pytest
-
-  frontend:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: frontend
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4 # version comes from package.json's packageManager field
-        with:
-          package_json_file: frontend/package.json
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 24
-          cache: pnpm
-          cache-dependency-path: frontend/pnpm-lock.yaml
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm build # regenerates routeTree.gen.ts, then tsc --noEmit
-      - run: git diff --exit-code -- src/routeTree.gen.ts # committed route tree must match the routes
-      - run: pnpm lint # Biome lint + format check (biome.jsonc)
-      - run: pnpm test
-      - run: pnpm depcruise # import-boundary fence (.dependency-cruiser.cjs)
-      - run: pnpm build-storybook # broken stories fail CI
-
   e2e:
     runs-on: ubuntu-latest
     steps:

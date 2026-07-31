@@ -1,5 +1,9 @@
 # Web app template
 
+[![Backend](https://github.com/CraigRhodes/agentic-tdd-webapp-template/actions/workflows/backend.yml/badge.svg?branch=main)](https://github.com/CraigRhodes/agentic-tdd-webapp-template/actions/workflows/backend.yml)
+[![Frontend](https://github.com/CraigRhodes/agentic-tdd-webapp-template/actions/workflows/frontend.yml/badge.svg?branch=main)](https://github.com/CraigRhodes/agentic-tdd-webapp-template/actions/workflows/frontend.yml)
+[![E2E](https://github.com/CraigRhodes/agentic-tdd-webapp-template/actions/workflows/e2e.yml/badge.svg?branch=main)](https://github.com/CraigRhodes/agentic-tdd-webapp-template/actions/workflows/e2e.yml)
+
 A starter for web apps (React frontend + FastAPI backend) with the working
 agreements pre-wired: double-loop TDD, tests-as-documentation, component
 folders with co-located tests and stories, contract fixtures pinning the API,
@@ -21,11 +25,13 @@ and an import-boundary linter — all running in one CI gate.
    component map). The other docs are generic and ready to use.
 4. Search for `App`/`app` naming you want to change: the backend package is
    `backend/src/app/`, the frontend title is in `frontend/index.html`.
-5. Replace the placeholder design tokens in `frontend/src/styles/index.css`.
-6. Revisit `LICENSE`: it covers this template (MIT). Keep it if your product
+5. Repoint the CI badges at the top of this README at your repo (swap the
+   `<owner>/<repo>` segments in each URL).
+6. Replace the placeholder design tokens in `frontend/src/styles/index.css`.
+7. Revisit `LICENSE`: it covers this template (MIT). Keep it if your product
    is open source; replace or remove it if not — your copy of the template
    doesn't need to stay MIT.
-7. Delete this section of the README and describe your product.
+8. Delete this section of the README and describe your product.
 
 ## Quick start
 
@@ -62,7 +68,8 @@ cd frontend && pnpm build-storybook   # broken stories fail
 cd frontend && pnpm e2e               # Playwright; boots backend + frontend
 ```
 
-CI (`.github/workflows/ci.yml`) runs the identical gate on every PR. All
+CI (`.github/workflows/` — backend, frontend, and e2e workflows, one badge
+each) runs the identical gate on every PR. All
 work follows the double-loop TDD workflow in
 [`docs/task-workflow.md`](docs/task-workflow.md).
 
@@ -75,6 +82,6 @@ docs/                   workflow (feature lifecycle + who does what) · prd (stu
                         design (stub) · architecture · components · task-workflow
 backend/                FastAPI + Pydantic v2, uv-managed (package: app)
 frontend/               Vite + React + TS strict, TanStack Router/Query, Tailwind, Storybook
-.github/                workflows/: CI, the full gate on every PR ·
+.github/                workflows/: backend + frontend + e2e, the full gate on every PR ·
                         dependabot.yml: weekly grouped dependency bumps
 ```

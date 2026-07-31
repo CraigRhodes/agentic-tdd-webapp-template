@@ -179,8 +179,8 @@ diverging from an approved doc.
   document.
 - Commits, PR titles, and PR bodies follow the attribution rule in
   `CLAUDE.md`: plain descriptions of the change only.
-- CI runs the same gate (`.github/workflows/ci.yml`); a PR is not done until
-  CI is green.
+- CI runs the same gate (`.github/workflows/` — backend, frontend, and e2e
+  workflows); a PR is not done until CI is green.
 
 ## Anti-patterns (automatic rework)
 
