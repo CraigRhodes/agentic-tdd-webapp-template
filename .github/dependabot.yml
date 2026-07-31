@@ -12,6 +12,16 @@ updates:
     groups:
       frontend:
         patterns: ["*"]
+    ignore:
+      # @types/node majors track Node majors; stay in lockstep with the Node
+      # version pinned in .nvmrc/engines — lift this when bumping Node itself.
+      - dependency-name: "@types/node"
+        update-types: ["version-update:semver-major"]
+      # dependency-cruiser supports typescript <7; a newer major kills the
+      # import fence (depcruise cruises 0 modules and the gate fails). Lift
+      # when dependency-cruiser supports the new typescript major.
+      - dependency-name: typescript
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: uv
     directory: /backend
